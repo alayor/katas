@@ -11,3 +11,5 @@ For each trip to the parlor, print the ID numbers for the two types
 of ice cream that Sunny and Johnny purchase as two space-separated 
 integers on a new line. You must print the smaller ID first and the 
 larger ID second.
+
+https://www.hackerrank.com/challenges/icecream-parlor
