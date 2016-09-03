@@ -59,6 +59,33 @@ public class HackerRankSupportTest {
         assertEquals(asList(2, 3, 4), hackerRankSupport.readList());
     }
 
+    @Test
+    public void givenIntLine_shouldReadListOf2_3_4() {
+        HackerRankSupport_Spy hackerRankSupport = new HackerRankSupport_Spy(getInputStream(
+                "" +
+                        "2\n" +
+                        "7\n" +
+                        "2 3 4"
+        ), printStream);
+        hackerRankSupport.readLine();
+
+        assertEquals(asList(2, 3, 4), hackerRankSupport.readList());
+    }
+
+    @Test
+    public void givenTwoIntLines_shouldReadListOf2_3_4() {
+        HackerRankSupport_Spy hackerRankSupport = new HackerRankSupport_Spy(getInputStream(
+                "" +
+                        "2\n" +
+                        "7\n" +
+                        "9\n" +
+                        "2 3 4"
+        ), printStream);
+        hackerRankSupport.readDoubleLine();
+
+        assertEquals(asList(2, 3, 4), hackerRankSupport.readList());
+    }
+
     private InputStream getInputStream(String str) {
         return new ByteArrayInputStream(
                 str.getBytes(

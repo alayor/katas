@@ -3,7 +3,6 @@ package hackerrank.searching.ice_cream_parlor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class IceCreamParlorTest {
 

@@ -8,13 +8,13 @@ import java.util.Scanner;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-abstract class HackerRankSupport {
+public abstract class HackerRankSupport {
 
     private Scanner scanner;
     private PrintStream printStream;
     private int casesNumber;
 
-    HackerRankSupport(InputStream stream, PrintStream printStream) {
+    protected HackerRankSupport(InputStream stream, PrintStream printStream) {
         scanner = new Scanner(stream);
         this.printStream = printStream;
         casesNumber = scanner.nextInt();
@@ -23,7 +23,7 @@ abstract class HackerRankSupport {
         }
     }
 
-    void run() {
+    public void run() {
         while (casesNumber-- > 0) {
             execute();
         }
@@ -31,17 +31,26 @@ abstract class HackerRankSupport {
 
     public abstract void execute();
 
-    int readInt() {
+    protected int readInt() {
         return scanner.nextInt();
     }
 
-    void println(String s) {
+    protected void println(String s) {
         printStream.println(s);
     }
 
-    List<Integer> readList() {
-        return stream(scanner.nextLine().split(" "))
+    protected List<Integer> readList() {
+        return stream(scanner.nextLine().split("\\s+"))
                 .map(Integer::new)
                 .collect(toList());
+    }
+
+    protected void readLine() {
+        scanner.nextLine();
+    }
+
+    protected void readDoubleLine() {
+        scanner.nextLine();
+        scanner.nextLine();
     }
 }
