@@ -23,7 +23,7 @@ class Friend {
         return parentId;
     }
 
-    public boolean isNotRoot() {
+    boolean isNotRoot() {
         return id != parentId;
     }
 }

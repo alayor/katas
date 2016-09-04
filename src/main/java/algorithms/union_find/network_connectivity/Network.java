@@ -8,22 +8,30 @@ class Network {
     private Map<Integer, Integer> groupSize = new TreeMap<>();
 
     void connect(Friend friendA, Friend friendB) {
-        friendA.setParentId(getRoot(friendB.getId()));
-        increaseGroupSize(friendA);
-        increaseGroupSize(friendB);
+        connectRoots(getRoot(friendA), getRoot(friendB));
+    }
+
+    private void connectRoots(Friend rootA, Friend rootB) {
+        if (getSize(rootA) > getSize(rootB)) {
+            rootB.setParentId(rootA.getParentId());
+            increaseGroupSize(rootA);
+        } else {
+            rootA.setParentId(rootB.getParentId());
+            increaseGroupSize(rootB);
+        }
     }
 
     private void increaseGroupSize(Friend friendA) {
-        int size = getSize(friendA.getId());
+        int size = getSize(friendA);
         groupSize.put(friendA.getId(), ++size);
     }
 
-    int getRoot(int id) {
-        Friend friend = friends.get(id);
-        while (friend.isNotRoot()) {
-            friend = friends.get(friend.getParentId());
+    Friend getRoot(Friend friend) {
+        Friend root = friends.get(friend.getId());
+        while (root.isNotRoot()) {
+            root = friends.get(friend.getParentId());
         }
-        return friend.getId();
+        return root;
     }
 
     private void addFriend(Friend friend) {
@@ -39,7 +47,7 @@ class Network {
         }
     }
 
-    int getSize(int id) {
-        return groupSize.get(id);
+    int getSize(Friend friend) {
+        return groupSize.get(getRoot(friend).getId());
     }
 }

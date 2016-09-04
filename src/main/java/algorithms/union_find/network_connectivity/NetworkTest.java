@@ -34,25 +34,39 @@ public class NetworkTest {
 
     @Test
     public void given_just_one_friend_its_root_should_be_the_same_as_its_id(){
-        assertEquals(friendA.getId(), network.getRoot(friendA.getId()));
+        assertEquals(friendA.getId(), network.getRoot(friendA).getId());
     }
 
     @Test
     public void given_two_connected_friends_their_roots_should_be_the_same(){
         network.connect(friendA, friendB);
-        assertEquals(network.getRoot(friendA.getId()), network.getRoot(friendB.getId()));
+        assertEquals(network.getRoot(friendA), network.getRoot(friendB));
     }
 
     @Test
     public void given_two_connected_friends_its_group_size_should_be_two(){
         network.connect(friendA, friendB);
-        assertEquals(2, network.getSize(friendA.getId()));
-        assertEquals(2, network.getSize(friendB.getId()));
+        assertEquals(2, network.getSize(friendA));
+        assertEquals(2, network.getSize(friendB));
     }
 
     @Test
     public void given_no_connected_friend_its_size_should_be_one(){
         network.connect(friendA, friendB);
-        assertEquals(1, network.getSize(friendC.getId()));
+        assertEquals(1, network.getSize(friendC));
+    }
+
+    @Test
+    public void given_A_connects_to_B_and_C_then_root_of_C_should_be_parent_id_of_B(){
+        network.connect(friendA, friendB);
+        network.connect(friendA, friendC);
+        assertEquals(friendB, network.getRoot(friendC));
+    }
+
+    @Test
+    public void given_A_connects_to_B_and_C_then_size_of_root_of_B_should_be_3(){
+        network.connect(friendA, friendB);
+        network.connect(friendA, friendC);
+        assertEquals(3, network.getSize(friendB));
     }
 }
