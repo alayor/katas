@@ -1,4 +1,4 @@
-package algorithms.union_find;
+package algorithms.union_find.network_connectivity;
 
 class Friend {
     private static int ID_GENERATOR;
@@ -21,9 +21,5 @@ class Friend {
 
     int getParentId() {
         return parentId;
-    }
-
-    void connect(Friend friend) {
-        this.parentId = friend.id;
     }
 }
