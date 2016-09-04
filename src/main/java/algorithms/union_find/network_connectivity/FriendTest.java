@@ -57,4 +57,10 @@ public class FriendTest {
     public void if_two_friends_are_not_connected_then_they_should_have_different_parent_ids() {
         assertNotEquals(friend1.getParentId(), friend2.getParentId());
     }
+
+    @Test
+    public void if_id_and_parent_id_are_different_should_return_not_root() {
+        friend1.setParentId(friend1.getId() + 1);
+        assertTrue(friend1.isNotRoot());
+    }
 }

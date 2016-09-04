@@ -22,4 +22,8 @@ class Friend {
     int getParentId() {
         return parentId;
     }
+
+    public boolean isNotRoot() {
+        return id != parentId;
+    }
 }

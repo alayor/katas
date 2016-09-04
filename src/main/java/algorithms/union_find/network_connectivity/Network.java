@@ -5,28 +5,41 @@ import java.util.TreeMap;
 
 class Network {
     private Map<Integer, Friend> friends = new TreeMap<>();
+    private Map<Integer, Integer> groupSize = new TreeMap<>();
 
     void connect(Friend friendA, Friend friendB) {
-        addFriends(friendA, friendB);
-        friendA.setParentId(getRoot(friendB));
+        friendA.setParentId(getRoot(friendB.getId()));
+        increaseGroupSize(friendA);
+        increaseGroupSize(friendB);
     }
 
-    int getRoot(Friend friend) {
-        addFriend(friend);
-        Friend current = friends.get(friend.getId());
-        while (current.getId() != current.getParentId()) {
-            current = friends.get(current.getParentId());
+    private void increaseGroupSize(Friend friendA) {
+        int size = getSize(friendA.getId());
+        groupSize.put(friendA.getId(), ++size);
+    }
+
+    int getRoot(int id) {
+        Friend friend = friends.get(id);
+        while (friend.isNotRoot()) {
+            friend = friends.get(friend.getParentId());
         }
-        return current.getId();
+        return friend.getId();
     }
 
     private void addFriend(Friend friend) {
-        friends.put(friend.getId(), friend);
+        if (friends.get(friend.getId()) == null) {
+            friends.putIfAbsent(friend.getId(), friend);
+            groupSize.put(friend.getId(), 1);
+        }
     }
 
-    private void addFriends(Friend... friend) {
-        for (Friend f : friend) {
-            friends.put(f.getId(), f);
+    void addFriends(Friend... friends) {
+        for (Friend friend : friends) {
+           addFriend(friend);
         }
+    }
+
+    int getSize(int id) {
+        return groupSize.get(id);
     }
 }

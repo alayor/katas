@@ -10,12 +10,15 @@ public class NetworkTest {
     private Network network;
     private Friend friendA;
     private Friend friendB;
+    private Friend friendC;
 
     @Before
     public void setUp() throws Exception {
         network = new Network();
         friendA = new Friend();
         friendB = new Friend();
+        friendC = new Friend();
+        network.addFriends(friendA, friendB, friendC);
     }
 
     @Test
@@ -31,12 +34,25 @@ public class NetworkTest {
 
     @Test
     public void given_just_one_friend_its_root_should_be_the_same_as_its_id(){
-        assertEquals(friendA.getId(), network.getRoot(friendA));
+        assertEquals(friendA.getId(), network.getRoot(friendA.getId()));
     }
 
     @Test
     public void given_two_connected_friends_their_roots_should_be_the_same(){
         network.connect(friendA, friendB);
-        assertEquals(network.getRoot(friendA), network.getRoot(friendB));
+        assertEquals(network.getRoot(friendA.getId()), network.getRoot(friendB.getId()));
+    }
+
+    @Test
+    public void given_two_connected_friends_its_group_size_should_be_two(){
+        network.connect(friendA, friendB);
+        assertEquals(2, network.getSize(friendA.getId()));
+        assertEquals(2, network.getSize(friendB.getId()));
+    }
+
+    @Test
+    public void given_no_connected_friend_its_size_should_be_one(){
+        network.connect(friendA, friendB);
+        assertEquals(1, network.getSize(friendC.getId()));
     }
 }
