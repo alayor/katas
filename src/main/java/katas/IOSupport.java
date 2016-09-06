@@ -1,4 +1,4 @@
-package hackerrank;
+package katas;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -8,48 +8,48 @@ import java.util.Scanner;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-public abstract class HackerRankSupport {
-
+public abstract class IOSupport {
     private Scanner scanner;
     private PrintStream printStream;
-    private int casesNumber;
 
-    protected HackerRankSupport(InputStream stream, PrintStream printStream) {
+    protected IOSupport(InputStream stream, PrintStream printStream) {
         scanner = new Scanner(stream);
         this.printStream = printStream;
-        casesNumber = scanner.nextInt();
-        if (scanner.hasNext()) {
-            scanner.nextLine();
-        }
     }
 
-    public void run() {
-        while (casesNumber-- > 0) {
-            execute();
-        }
+    protected boolean hasNext() {
+        return scanner.hasNext();
     }
 
-    public abstract void execute();
+    protected void nextLine() {
+        scanner.nextLine();
+    }
 
-    protected int readInt() {
+    protected int nextInt() {
         return scanner.nextInt();
     }
 
-    protected void println(String s) {
+    protected abstract void run();
+
+    public int readInt() {
+        return scanner.nextInt();
+    }
+
+    public void println(String s) {
         printStream.println(s);
     }
 
-    protected List<Integer> readList() {
+    public List<Integer> readList() {
         return stream(scanner.nextLine().split("\\s+"))
                 .map(Integer::new)
                 .collect(toList());
     }
 
-    protected void readLine() {
+    public void readLine() {
         scanner.nextLine();
     }
 
-    protected void readDoubleLine() {
+    public void readDoubleLine() {
         scanner.nextLine();
         scanner.nextLine();
     }

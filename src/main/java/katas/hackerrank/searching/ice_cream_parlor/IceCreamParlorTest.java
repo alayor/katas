@@ -1,4 +1,4 @@
-package hackerrank.searching.ice_cream_parlor;
+package katas.hackerrank.searching.ice_cream_parlor;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package hackerrank.searching.ice_cream_parlor;
+package katas.hackerrank.searching.ice_cream_parlor;
 
-import hackerrank.HackerRankSupport;
+import katas.hackerrank.HackerRankSupport;
 
 import java.io.InputStream;
 import java.io.PrintStream;

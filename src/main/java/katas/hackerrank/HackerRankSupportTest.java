@@ -1,4 +1,4 @@
-package hackerrank;
+package katas.hackerrank;
 
 import org.junit.Test;
 

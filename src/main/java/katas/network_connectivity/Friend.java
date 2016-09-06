@@ -1,4 +1,4 @@
-package algorithms.union_find.network_connectivity;
+package katas.network_connectivity;
 
 class Friend {
     private static int ID_GENERATOR;
