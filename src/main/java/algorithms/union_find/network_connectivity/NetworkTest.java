@@ -11,6 +11,9 @@ public class NetworkTest {
     private Friend friendA;
     private Friend friendB;
     private Friend friendC;
+    private Friend friendD;
+    private Friend friendE;
+    private Friend friendF;
 
     @Before
     public void setUp() throws Exception {
@@ -18,7 +21,12 @@ public class NetworkTest {
         friendA = new Friend();
         friendB = new Friend();
         friendC = new Friend();
-        network.addFriends(friendA, friendB, friendC);
+        friendD = new Friend();
+        friendE = new Friend();
+        friendF = new Friend();
+        network.addFriends(
+                friendA, friendB, friendC,
+                friendD, friendE, friendF);
     }
 
     @Test
@@ -86,5 +94,30 @@ public class NetworkTest {
         network.connect(friendA, friendB);
         network.connect(friendB, friendC);
         assertTrue(network.areConnected(friendA, friendC));
+    }
+
+    @Test
+    public void given_no_connected_friends_all_friends_should_not_be_connected() {
+        assertFalse(network.areAllConnected());
+    }
+
+    @Test
+    public void test_that_all_friends_are_connected() {
+        network.connect(friendA, friendB);
+        network.connect(friendB, friendC);
+        network.connect(friendC, friendD);
+        network.connect(friendD, friendE);
+        network.connect(friendE, friendF);
+        assertTrue(network.areAllConnected());
+    }
+
+    @Test
+    public void multiple_connected_friends_should_have_the_same_root() {
+        network.connect(friendA, friendB);
+        network.connect(friendB, friendC);
+        network.connect(friendD, friendE);
+        network.connect(friendE, friendF);
+        network.connect(friendA, friendF);
+        assertEquals(network.getRoot(friendA), network.getRoot(friendF));
     }
 }

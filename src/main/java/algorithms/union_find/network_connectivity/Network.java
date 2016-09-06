@@ -29,7 +29,9 @@ class Network {
     Friend getRoot(Friend friend) {
         Friend root = friends.get(friend.getId());
         while (root.isNotRoot()) {
-            root = friends.get(friend.getParentId());
+            Friend oldRoot = root;
+            root = friends.get(root.getParentId());
+            oldRoot.setParentId(root.getParentId());
         }
         return root;
     }
@@ -43,7 +45,7 @@ class Network {
 
     void addFriends(Friend... friends) {
         for (Friend friend : friends) {
-           addFriend(friend);
+            addFriend(friend);
         }
     }
 
@@ -53,5 +55,26 @@ class Network {
 
     boolean areConnected(Friend friendA, Friend friendB) {
         return getRoot(friendA) == getRoot(friendB);
+    }
+
+    boolean areAllConnected() {
+        Friend root = getFirstFriendRoot();
+        if (root == null) {
+            return false;
+        }
+        for (Friend friend : friends.values()) {
+            if (getRoot(friend) != root) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Friend getFirstFriendRoot() {
+        Friend root = null;
+        for (Friend friendA : friends.values()) {
+            root = getRoot(friendA);
+        }
+        return root;
     }
 }
