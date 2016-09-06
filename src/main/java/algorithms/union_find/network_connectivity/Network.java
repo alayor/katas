@@ -50,4 +50,8 @@ class Network {
     int getSize(Friend friend) {
         return groupSize.get(getRoot(friend).getId());
     }
+
+    boolean areConnected(Friend friendA, Friend friendB) {
+        return getRoot(friendA) == getRoot(friendB);
+    }
 }
