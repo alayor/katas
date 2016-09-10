@@ -1,6 +1,5 @@
-package algorithms.union_find.network_connectivity;
+package katas.algorithms.union_find.network_connectivity;
 
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 

@@ -1,4 +1,4 @@
-package algorithms.union_find.network_connectivity;
+package katas.algorithms.union_find.network_connectivity;
 
 import katas.IOSupport;
 
@@ -6,12 +6,17 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.*;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 class Main extends IOSupport {
 
     private Network network = new Network();
+
+    public static void main(String[] args) {
+        new Main(System.in, System.out).run();
+    }
 
     Main(InputStream stream, PrintStream printStream) {
         super(stream, printStream);
@@ -27,7 +32,10 @@ class Main extends IOSupport {
     private List<Friendship> getFriendships() {
         List<Friendship> friendships = new ArrayList<>();
         while (hasNextLine()) {
-            Friendship friendship = new Friendship();
+            String record = readLine();
+            if(record.isEmpty()) break;
+
+            Friendship friendship = new Friendship(record);
             friendships.add(friendship);
         }
         friendships = filterInvalidFriendships(friendships);
@@ -64,19 +72,19 @@ class Main extends IOSupport {
         private final Friend friendA;
         private final Friend friendB;
 
-        private Friendship() {
+        private Friendship(String record) {
             int idA;
             int idB;
             String date;
+            StringTokenizer tokenizer = new StringTokenizer(record, " ");
             try {
-                idA = nextInt();
-                idB = nextInt();
-                date = readString();
-            } catch (InputMismatchException ex) {
+                idA = parseInt(tokenizer.nextToken());
+                idB = parseInt(tokenizer.nextToken());
+                date = tokenizer.nextToken();
+            } catch (Exception ex) {
                 idA = -1;
                 idB = -1;
                 date = null;
-                nextLine();
             }
             friendA = new Friend(idA);
             friendB = new Friend(idB);

@@ -1,4 +1,4 @@
-package algorithms.union_find.network_connectivity;
+package katas.algorithms.union_find.network_connectivity;
 
 import org.junit.Test;
 
