@@ -1,5 +1,6 @@
-package katas.network_connectivity;
+package algorithms.union_find.network_connectivity;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,7 +9,14 @@ class Network {
     private Map<Integer, Integer> groupSize = new TreeMap<>();
 
     void connect(Friend friendA, Friend friendB) {
-        connectRoots(getRoot(friendA), getRoot(friendB));
+        if (bothInNetwork(friendA, friendB)) {
+            connectRoots(getRoot(friendA), getRoot(friendB));
+        }
+    }
+
+    private boolean bothInNetwork(Friend friendA, Friend friendB) {
+        return friends.get(friendA.getId()) != null &&
+                friends.get(friendB.getId()) != null;
     }
 
     private void connectRoots(Friend rootA, Friend rootB) {
@@ -54,7 +62,8 @@ class Network {
     }
 
     boolean areConnected(Friend friendA, Friend friendB) {
-        return getRoot(friendA) == getRoot(friendB);
+        return friends.get(friendA.getId()) != null &&
+        friends.get(friendB.getId()) != null && getRoot(friendA) == getRoot(friendB);
     }
 
     boolean areAllConnected() {

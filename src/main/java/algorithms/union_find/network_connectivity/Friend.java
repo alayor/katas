@@ -1,14 +1,12 @@
-package katas.network_connectivity;
+package algorithms.union_find.network_connectivity;
 
 class Friend {
-    private static int ID_GENERATOR;
     private int id;
     private int parentId;
 
-    Friend() {
-        ID_GENERATOR++;
-        this.id = ID_GENERATOR;
-        this.parentId = ID_GENERATOR;
+    Friend(int id) {
+        this.id = id;
+        this.parentId = id;
     }
 
     int getId() {

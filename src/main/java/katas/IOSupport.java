@@ -21,6 +21,10 @@ public abstract class IOSupport {
         return scanner.hasNext();
     }
 
+    protected boolean hasNextLine() {
+        return scanner.hasNextLine();
+    }
+
     protected void nextLine() {
         scanner.nextLine();
     }
@@ -39,14 +43,22 @@ public abstract class IOSupport {
         printStream.println(s);
     }
 
+    public void print(String s) {
+        printStream.print(s);
+    }
+
     public List<Integer> readList() {
         return stream(scanner.nextLine().split("\\s+"))
                 .map(Integer::new)
                 .collect(toList());
     }
 
-    public void readLine() {
-        scanner.nextLine();
+    public String readLine() {
+        return scanner.nextLine();
+    }
+
+    protected String readString() {
+        return scanner.next();
     }
 
     public void readDoubleLine() {

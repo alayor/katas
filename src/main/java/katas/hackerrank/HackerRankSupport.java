@@ -18,7 +18,6 @@ public abstract class HackerRankSupport extends IOSupport {
         }
     }
 
-    @Override
     public void run() {
         while (casesNumber-- > 0) {
             execute();

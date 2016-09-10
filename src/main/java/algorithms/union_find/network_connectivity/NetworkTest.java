@@ -1,4 +1,4 @@
-package katas.network_connectivity;
+package algorithms.union_find.network_connectivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,12 +18,12 @@ public class NetworkTest {
     @Before
     public void setUp() throws Exception {
         network = new Network();
-        friendA = new Friend();
-        friendB = new Friend();
-        friendC = new Friend();
-        friendD = new Friend();
-        friendE = new Friend();
-        friendF = new Friend();
+        friendA = new Friend(1);
+        friendB = new Friend(2);
+        friendC = new Friend(3);
+        friendD = new Friend(4);
+        friendE = new Friend(5);
+        friendF = new Friend(6);
         network.addFriends(
                 friendA, friendB, friendC,
                 friendD, friendE, friendF);
@@ -119,5 +119,13 @@ public class NetworkTest {
         network.connect(friendE, friendF);
         network.connect(friendA, friendF);
         assertEquals(network.getRoot(friendA), network.getRoot(friendF));
+    }
+
+    @Test
+    public void connect_two_friends_not_in_network_should_not_be_connected() {
+        Friend friendG = new Friend(7);
+        Friend friendH = new Friend(8);
+        network.connect(friendG, friendH);
+        assertFalse(network.areConnected(friendG, friendH));
     }
 }

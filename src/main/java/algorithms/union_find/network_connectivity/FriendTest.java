@@ -1,4 +1,4 @@
-package katas.network_connectivity;
+package algorithms.union_find.network_connectivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +12,8 @@ public class FriendTest {
 
     @Before
     public void setUp() throws Exception {
-        friendA = new Friend();
-        friendB = new Friend();
+        friendA = new Friend(1);
+        friendB = new Friend(2);
     }
 
     @Test
