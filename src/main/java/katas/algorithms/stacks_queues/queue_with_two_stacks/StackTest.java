@@ -95,6 +95,25 @@ public class StackTest {
         assertEquals(8, stack.getSize());
     }
 
+    @Test
+    public void given_4_pushes_and_2_pops_then_size_should_be_4() {
+        //when
+        pushTimes(4);
+        stack.pop();
+        stack.pop();
+        //then
+        assertEquals(4, stack.getSize());
+    }
+
+    @Test
+    public void given_4_pushes_and_1_pop_then_size_should_be_8() {
+        //when
+        pushTimes(4);
+        stack.pop();
+        //then
+        assertEquals(8, stack.getSize());
+    }
+
     private void pushTimes(int times) {
         while (times-- > 0) {
             stack.push(times);

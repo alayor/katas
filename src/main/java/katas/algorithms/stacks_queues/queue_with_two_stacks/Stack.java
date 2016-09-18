@@ -16,21 +16,21 @@ class Stack<T> {
 
     void push(T object) {
         array[n++] = object;
-        if (n == array.length) {
-            increaseArraySize(n * 2);
-        }
+        if (n == array.length) adjustSize();
     }
 
-    private void increaseArraySize(int newSize) {
-        T[] newArray = createArray(newSize);
-        arraycopy(array, 0, newArray, 0, array.length);
+    private void adjustSize() {
+        T[] newArray = createArray(n * 2);
+        arraycopy(array, 0, newArray, 0, n);
         array = newArray;
     }
 
     Optional<T> pop() {
         if (n < 1)
             return empty();
-        return of(array[--n]);
+        Optional<T> value = of(array[--n]);
+        if (n == array.length / 4) adjustSize();
+        return value;
     }
 
     int getSize() {
